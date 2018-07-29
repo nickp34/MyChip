@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-combobox
-      v-model="selectedChips"
+      v-model="value"
       :items="availableChips"
       label="Best UT Titles"
       chips
@@ -25,20 +25,21 @@
 
 <script>
   export default {
-    data: () => ({
-      selectedChips: [
-        'Unreal', 
-        'Untreal Tournament 2004',
-      ],
-      availableChips: [
-        'Unreal', 
-        'Unreal II', 
-        'Unreal Tournament', 
-        'Unreal Tournament 2003',
-        'Unreal Tournament 3', 
-        'Untreal Tournament 2004',        
-      ],
-    }),
+    props: {
+      value: Array,
+    },
+    data() {
+      return {
+        availableChips: [
+          'Unreal', 
+          'Unreal II', 
+          'Unreal Tournament', 
+          'Unreal Tournament 2003',
+          'Unreal Tournament 3', 
+          'Untreal Tournament 2004',        
+        ],
+      } 
+    },
     methods: {
       remove (item) {
         this.selectedChips.splice(this.selectedChips.indexOf(item), 1);
