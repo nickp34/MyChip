@@ -1,7 +1,8 @@
 <template>
   <div>
     <v-combobox
-      v-model="value"
+      v-model="mySelected"
+      @input="add"
       :items="available"
       :label="label"
       chips
@@ -49,6 +50,7 @@
     },
     data () {
       return {
+        mySelected: this.value,
         snackbar: false,
         timeout: 6000,
         text: 'Chip Removed'
@@ -56,14 +58,16 @@
     },
     methods: {
       remove (item) {
-        let selected = Object.assign([], this.value);
-        selected.splice(selected.indexOf(item), 1);
-        selected = [...selected];
+        this.mySelected.splice(this.mySelected.indexOf(item), 1);
+        this.mySelected = [...this.mySelected];
 
-        this.$emit('input', selected);
+        this.$emit('input', this.mySelected);
 
         this.snackbar = true;
       },
+      add () {
+        this.$emit('input', this.value);
+      }
     },
   };
 </script>
