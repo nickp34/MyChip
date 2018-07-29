@@ -27,18 +27,7 @@
   export default {
     props: {
       value: Array,
-    },
-    data() {
-      return {
-        availableChips: [
-          'Unreal', 
-          'Unreal II', 
-          'Unreal Tournament', 
-          'Unreal Tournament 2003',
-          'Unreal Tournament 3', 
-          'Untreal Tournament 2004',        
-        ],
-      } 
+      availableChips: Array,
     },
     methods: {
       remove (item) {
