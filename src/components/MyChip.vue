@@ -42,8 +42,11 @@
     },
     methods: {
       remove (item) {
-        this.selectedChips.splice(this.selectedChips.indexOf(item), 1);
-        this.selectedChips = [...this.selectedChips];
+        let selected = Object.assign([], this.value);
+        selected.splice(selected.indexOf(item), 1);
+        selected = [...selected];
+
+        this.$emit('input', selected);
       },
     },
   };
