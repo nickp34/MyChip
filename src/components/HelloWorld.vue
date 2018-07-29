@@ -3,8 +3,9 @@
     <v-slide-y-transition mode="out-in">
       <v-layout column align-center>
         <MyChip
-          v-model="selectedUnrealTitles"
-          :availableChips="availableChips"
+          v-model="selectedTitles"
+          :available="available"
+          :label="label"
         />
       </v-layout>
     </v-slide-y-transition>
@@ -24,11 +25,11 @@ export default {
   },
   data() {
     return {
-      selectedUnrealTitles: [
+      selectedTitles: [
         'Unreal',
         'Untreal Tournament 2004',
       ],
-      availableChips: [
+      available: [
         'Unreal',
         'Unreal II',
         'Unreal Tournament',
@@ -36,6 +37,7 @@ export default {
         'Unreal Tournament 3',
         'Untreal Tournament 2004',
       ],
+      label: "Best UT Titles",
     }
   }
 }

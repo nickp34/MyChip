@@ -2,13 +2,14 @@
   <div>
     <v-combobox
       v-model="value"
-      :items="availableChips"
-      label="Best UT Titles"
+      :items="available"
+      :label="label"
       chips
       clearable
       prepend-icon="filter_list"
       solo
       multiple
+      dark
     >
       <template slot="selection" slot-scope="data">
         <v-chip
@@ -20,6 +21,22 @@
         </v-chip>
       </template>
     </v-combobox>
+
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+      color="red"
+      vertical
+    >
+      {{ text }}
+      <v-btn
+        dark
+        flat
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -27,7 +44,15 @@
   export default {
     props: {
       value: Array,
-      availableChips: Array,
+      available: Array,
+      label: String,
+    },
+    data () {
+      return {
+        snackbar: false,
+        timeout: 6000,
+        text: 'Chip Removed'
+      }
     },
     methods: {
       remove (item) {
@@ -36,6 +61,8 @@
         selected = [...selected];
 
         this.$emit('input', selected);
+
+        this.snackbar = true;
       },
     },
   };

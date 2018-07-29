@@ -12,6 +12,7 @@ import {
   transitions,
   VCombobox,
   VChip,
+  VSnackbar,
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
 
@@ -28,5 +29,6 @@ Vue.use(Vuetify, {
     transitions,
     VCombobox,
     VChip,
+    VSnackbar,
   },
 })
