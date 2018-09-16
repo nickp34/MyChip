@@ -1,9 +1,8 @@
 <template>
   <div>
     <v-combobox
-      v-model="mySelected"
-      @input="add"
-      :items="available"
+      :value="getSelected"
+      :items="getAvailable"
       :label="label"
       chips
       clearable
@@ -11,6 +10,7 @@
       solo
       multiple
       dark
+      @change="onChange"
     >
       <template slot="selection" slot-scope="data">
         <v-chip
@@ -42,31 +42,31 @@
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex';
+
   export default {
     props: {
-      value: Array,
-      available: Array,
       label: String,
+    },
+    computed: {
+      ...mapGetters('game', ['getSelected', 'getAvailable']),
     },
     data () {
       return {
-        mySelected: this.value,
         snackbar: false,
         timeout: 6000,
         text: 'Chip Removed'
       }
     },
     methods: {
+      ...mapActions('game', ['setSelected']),
       remove (item) {
-        this.mySelected.splice(this.mySelected.indexOf(item), 1);
-        this.mySelected = [...this.mySelected];
-
-        this.$emit('input', this.mySelected);
-
+        const selected = Object.assign([], this.getSelected);
+        this.setSelected(selected.splice(selected.indexOf(item), 1));
         this.snackbar = true;
       },
-      add () {
-        this.$emit('input', this.value);
+      onChange (titles) {
+        this.setSelected(titles);
       }
     },
   };

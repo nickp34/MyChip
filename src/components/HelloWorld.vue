@@ -3,8 +3,6 @@
     <v-slide-y-transition mode="out-in">
       <v-layout column align-center>
         <MyChip
-          v-model="selectedTitles"
-          :available="available"
           :label="label"
         />
       </v-layout>
@@ -14,6 +12,7 @@
 
 <script>
 import MyChip from './MyChip';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'HelloWorld',
@@ -29,7 +28,7 @@ export default {
         'Unreal',
         'Untreal Tournament 2004',
       ],
-      available: [
+      availableTitles: [
         'Unreal',
         'Unreal II',
         'Unreal Tournament',
@@ -39,7 +38,19 @@ export default {
       ],
       label: "Best UT Titles",
     }
-  }
+  },
+  methods: {
+    ...mapActions('game', [
+      'setAvailable',
+    ]),
+    ...mapActions('game', {
+      setSelectedTitles: 'setSelected',
+    }),
+  },
+  mounted() {
+    this.setAvailable(this.availableTitles);
+    this.setSelectedTitles(this.selectedTitles);
+  },
 }
 </script>
 
